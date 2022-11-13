@@ -52,15 +52,14 @@ const TranslateTable = () => {
     setLoading(true);
     const outputLanguage =
       outputType === OutputTypes.Structured_Text
-        ? "structured text"
-        : "instruction list";
+        ? "Structured Text"
+        : "Instruction List";
     const prompt = `${codeInput}\n\ntranslate the above ${inputType} code to ${outputLanguage} code`;
-    console.log(prompt);
     const res = await openai.createCompletion({
       model: "code-davinci-002",
       prompt: prompt,
       temperature: 0,
-      max_tokens: 100,
+      max_tokens: 300,
     });
     setCodeOutput(res.data.choices[0].text ?? "");
     setLoading(false);
