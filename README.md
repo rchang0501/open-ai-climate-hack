@@ -22,9 +22,9 @@ npm i
 npm start
 ```
 
-### Demo 
-1. Simple if-else statement Python code with Text Davinci 
-
+## Demos
+### Text Davinci 
+config: 
 ```
 const prompt = `${codeInput}\n\ntranslate the above ${inputType} code to ${outputLanguage} code.`;
     const res = await openai.createCompletion({
@@ -35,11 +35,18 @@ const prompt = `${codeInput}\n\ntranslate the above ${inputType} code to ${outpu
     });
 ```
 
+1. Simple if-else statement Python code with Text Davinci 
+
 https://user-images.githubusercontent.com/46568041/201539567-288e38b2-cc57-4b50-be0e-68860ba754fc.mov
 
+2. HVAC controller Python code with Text Davinci
 
-2. Simple LeetCode Problem using Code Davinci
+https://user-images.githubusercontent.com/46568041/201540409-efe90800-8744-4201-ac43-1320b7d69a9d.mov
 
+*note: translation worked fine but the IF, ELSE statement captilization convention is not preserved. Syntactically is valid though since ST isn't case sensitive. 
+
+### Code Davinci 
+config: 
 ```
 const prompt = `${codeInput}\n\ntranslate the above ${inputType} code to ${outputLanguage} code`;
     const res = await openai.createCompletion({
@@ -49,6 +56,8 @@ const prompt = `${codeInput}\n\ntranslate the above ${inputType} code to ${outpu
       max_tokens: 115,
     });
 ```
+
+1. Simple LeetCode Problem using Code Davinci
 
 https://user-images.githubusercontent.com/46568041/201538931-c0704966-2325-4ffb-98b1-7bd2b8029cf9.mov
 
