@@ -14,13 +14,32 @@ import { InputTypes, OutputTypes } from "../common";
 import { Configuration, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
-    organization: "org-MfVBBu68da5QhwAPXxSsjwWU",
-    apiKey: process.env.OPENAI_API_KEY,
+  organization: "org-MfVBBu68da5QhwAPXxSsjwWU",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
 
 const TranslateTable = () => {
+  const [codeInput, setCodeInput] = React.useState("");
+  const [inputType, setInputType] = React.useState(InputTypes.Python);
+  const [outputType, setOutputType] = React.useState(
+    OutputTypes.Structured_Text
+  );
+
+  const handleInputTypeChange = (selectedType: InputTypes) => {
+    setInputType(selectedType);
+  };
+
+  const handleOutputTypeChange = (selectedType: OutputTypes) => {
+    setOutputType(selectedType);
+  };
+
+  const handleCodeInputChange = (e: any) => {
+    const inputValue = e.target.value;
+    setCodeInput(inputValue);
+  };
+
   return (
     <Box
       backgroundColor="background.black.200"
@@ -35,10 +54,13 @@ const TranslateTable = () => {
           placeholder="Select input language"
           variant="unstyled"
           color="text.default.100"
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+            handleInputTypeChange(e.target.value as InputTypes)
+          }
         >
-          <option value="python">{InputTypes.Python}</option>
-          <option value="cpp">{InputTypes.Cpp}</option>
-          <option value="c">{InputTypes.C}</option>
+          <option value={InputTypes.Python}>{InputTypes.Python}</option>
+          <option value={InputTypes.Cpp}>{InputTypes.Cpp}</option>
+          <option value={InputTypes.C}>{InputTypes.C}</option>
         </Select>
         <IconButton
           aria-label="switch-icon"
@@ -53,9 +75,14 @@ const TranslateTable = () => {
           placeholder="Select output language"
           variant="unstyled"
           color="text.default.100"
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+            handleOutputTypeChange(e.target.value as OutputTypes)
+          }
         >
-          <option value="structured_text">{OutputTypes.Structured_Text}</option>
-          <option value="instruction_list">
+          <option value={OutputTypes.Structured_Text}>
+            {OutputTypes.Structured_Text}
+          </option>
+          <option value={OutputTypes.Instruction_List}>
             {OutputTypes.Instruction_List}
           </option>
         </Select>
@@ -69,6 +96,7 @@ const TranslateTable = () => {
           resize="none"
           minHeight="50vh"
           placeholder="Enter your code here..."
+          onChange={handleCodeInputChange}
         />
         <Divider
           orientation="vertical"
