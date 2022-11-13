@@ -59,8 +59,8 @@ const TranslateTable = () => {
       temperature: 0,
       max_tokens: 100,
     });
-    if (res.data.choices[0].text) setLoading(false);
     setCodeOutput(res.data.choices[0].text ?? "");
+    setLoading(false);
   };
 
   return (
