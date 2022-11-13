@@ -1,4 +1,4 @@
 export enum OutputTypes {
-  Structured_Text = "st",
+  Structured_Text = "pascal",
   Instruction_List = "il",
 }

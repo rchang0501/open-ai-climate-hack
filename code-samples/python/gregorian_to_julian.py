@@ -18,6 +18,6 @@ def Greg2JD(year, month, day):
     else:
         c = int(365.25 * y)
     d = int(30.6001 * (m + 1))
-    jd = float(b + c + d + day + 1720994.5);
+    jd = float(b + c + d + day + 1720994.5)
 
     return jd

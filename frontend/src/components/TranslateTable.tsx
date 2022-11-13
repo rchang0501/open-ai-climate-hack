@@ -52,7 +52,7 @@ const TranslateTable = () => {
     setLoading(true);
     const outputLanguage =
       outputType === OutputTypes.Structured_Text
-        ? "structured text"
+        ? "pascal"
         : "Instruction List";
     const prompt = `${codeInput}\n\ntranslate the above ${inputType} code to ${outputLanguage} code.`;
     const res = await openai.createCompletion({
