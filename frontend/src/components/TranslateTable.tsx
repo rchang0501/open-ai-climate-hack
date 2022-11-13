@@ -7,7 +7,11 @@ import {
   IconButton,
   Spinner,
   Center,
+  Button,
 } from "@chakra-ui/react";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPersonChalkboard } from "@fortawesome/free-solid-svg-icons";
 
 import { ReactComponent as Arrow } from "../assets/arrow.svg";
 import { InputTypes, OutputTypes } from "../common";
@@ -31,6 +35,7 @@ const TranslateTable = () => {
     OutputTypes.Structured_Text
   );
   const [loading, setLoading] = React.useState(false);
+  const [explainLoading, setExplainLoading] = React.useState(false);
 
   const handleInputTypeChange = (selectedType: InputTypes) => {
     setInputType(selectedType);
@@ -48,13 +53,32 @@ const TranslateTable = () => {
     setCodeOutput(value);
   };
 
+  const handleExplainCode = async () => {
+    setExplainLoading(true);
+
+    const prompt = `${codeInput}\n\nexplain what the code does line by line`;
+    const res = await openai.createCompletion({
+      model: "text-davinci-002",
+      prompt: prompt,
+      temperature: 0,
+      max_tokens: 500,
+    });
+    const newText = `${codeInput}\n\n"""\nCode Explanation:\n${res.data.choices[0].text}\n"""`;
+    setCodeInput(newText);
+
+    setExplainLoading(false);
+  };
+
   const handleSubmit = async () => {
     setLoading(true);
+
     const outputLanguage =
       outputType === OutputTypes.Structured_Text
         ? "pascal"
         : "Instruction List";
-    const prompt = `${codeInput}\n\ntranslate the above ${inputType} code to ${outputLanguage} code.`;
+    const inputText = codeInput.split('"""')[0];
+
+    const prompt = `${inputText}\n\ntranslate the above ${inputType} code to ${outputLanguage} code.`;
     const res = await openai.createCompletion({
       model: "text-davinci-002",
       prompt: prompt,
@@ -62,6 +86,7 @@ const TranslateTable = () => {
       max_tokens: 500,
     });
     setCodeOutput(res.data.choices[0].text ?? "");
+
     setLoading(false);
   };
 
@@ -88,13 +113,13 @@ const TranslateTable = () => {
         <Center paddingX="50px" height="20px" width="20px">
           {loading ? (
             <Center>
-              <Spinner thickness="4px" speed="0.65s" color="accent.blue.100" />
+              <Spinner thickness="4px" speed="0.65s" color="accent.green.100" />
             </Center>
           ) : (
             <IconButton
               aria-label="switch-icon"
               isRound
-              backgroundColor="background.black.200"
+              backgroundColor="accent.green.200"
               _hover={{
                 bg: `accent.green.100`,
               }}
@@ -122,6 +147,7 @@ const TranslateTable = () => {
           height="90vh"
           language={inputType}
           defaultValue="# input your code"
+          value={codeInput}
           theme="vs-dark"
           onChange={handleCodeInputChange}
         />
@@ -134,6 +160,32 @@ const TranslateTable = () => {
           onChange={handleCodeOutputChange}
         />
       </HStack>
+      <Box position="absolute" zIndex="1" top="90vh" left="650px">
+        {explainLoading ? (
+          <Center marginLeft="67px">
+            <Spinner thickness="4px" speed="0.65s" color="accent.blue.100" />
+          </Center>
+        ) : (
+          <Button
+            textColor="text.default.100"
+            size="sm"
+            padding="20px"
+            backgroundColor="accent.blue.200"
+            _hover={{ bg: "accent.blue.100" }}
+            borderRadius="20px"
+            leftIcon={
+              <FontAwesomeIcon
+                icon={faPersonChalkboard}
+                color="white"
+                size="lg"
+              />
+            }
+            onClick={handleExplainCode}
+          >
+            explain code
+          </Button>
+        )}
+      </Box>
     </Box>
   );
 };

@@ -61,9 +61,11 @@ const colors = {
   accent: {
     green: {
       100: "#99B7A4",
+      200: "#59876a"
     },
     blue: {
       100: "#8DB8D0",
+      200: "#5285a1",
     },
   },
   background: {
