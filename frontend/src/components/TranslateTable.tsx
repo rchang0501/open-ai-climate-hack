@@ -11,6 +11,15 @@ import {
 import { ReactComponent as Switch } from "../assets/switch-arrows.svg";
 import { InputTypes, OutputTypes } from "../common";
 
+import { Configuration, OpenAIApi } from "openai";
+
+const configuration = new Configuration({
+    organization: "org-MfVBBu68da5QhwAPXxSsjwWU",
+    apiKey: process.env.OPENAI_API_KEY,
+});
+
+const openai = new OpenAIApi(configuration);
+
 const TranslateTable = () => {
   return (
     <Box
