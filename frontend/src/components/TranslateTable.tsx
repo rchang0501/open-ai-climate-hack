@@ -46,7 +46,7 @@ const TranslateTable = () => {
 
   const handleCodeOutputChange = (e: any) => {
     const inputValue = e.target.value;
-    setCodeInput(inputValue);
+    setCodeOutput(inputValue);
   };
 
   const handleSubmit = async () => {
