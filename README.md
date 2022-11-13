@@ -23,7 +23,22 @@ npm start
 ```
 
 ### Demo 
-1. Simple LeetCode Problem
+1. Simple if-else statement Python code with Text Davinci 
+
+```
+const prompt = `${codeInput}\n\ntranslate the above ${inputType} code to ${outputLanguage} code.`;
+    const res = await openai.createCompletion({
+      model: "text-davinci-002",
+      prompt: prompt,
+      temperature: 0,
+      max_tokens: 500,
+    });
+```
+
+https://user-images.githubusercontent.com/46568041/201539567-288e38b2-cc57-4b50-be0e-68860ba754fc.mov
+
+
+2. Simple LeetCode Problem using Code Davinci
 
 ```
 const prompt = `${codeInput}\n\ntranslate the above ${inputType} code to ${outputLanguage} code`;
