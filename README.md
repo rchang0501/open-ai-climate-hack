@@ -5,7 +5,7 @@
 1. Clone this repository and `cd` into the project folder
 
 ```bash
-https://github.com/rchang0501/open-ai-climate-hack.git
+git clone https://github.com/rchang0501/open-ai-climate-hack.git
 cd open-ai-climate-hack
 ```
 
