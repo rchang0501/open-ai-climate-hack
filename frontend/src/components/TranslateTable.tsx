@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPersonChalkboard } from "@fortawesome/free-solid-svg-icons";
 
 import { ReactComponent as Arrow } from "../assets/arrow.svg";
-import { InputTypes, OutputTypes } from "../common";
+import { InputTypes, OutputTypes, promptPrefix } from "../common";
 
 import Editor from "@monaco-editor/react";
 
@@ -56,14 +56,16 @@ const TranslateTable = () => {
   const handleExplainCode = async () => {
     setExplainLoading(true);
 
-    const prompt = `${codeInput}\n\nexplain what the code does line by line`;
+    const inputText = codeInput.split('"""')[0];
+
+    const prompt = `${inputText}\n\nexplain what the code does line by line`;
     const res = await openai.createCompletion({
       model: "text-davinci-002",
       prompt: prompt,
       temperature: 0,
       max_tokens: 500,
     });
-    const newText = `${codeInput}\n\n"""\nCode Explanation:\n${res.data.choices[0].text}\n"""`;
+    const newText = `${inputText}\n\n"""\nCode Explanation:\n${res.data.choices[0].text}\n"""`;
     setCodeInput(newText);
 
     setExplainLoading(false);
@@ -74,11 +76,11 @@ const TranslateTable = () => {
 
     const outputLanguage =
       outputType === OutputTypes.Structured_Text
-        ? "pascal"
+        ? "Structured Text"
         : "Instruction List";
     const inputText = codeInput.split('"""')[0];
 
-    const prompt = `${inputText}\n\ntranslate the above ${inputType} code to ${outputLanguage} code.`;
+    const prompt = `${promptPrefix}\n\n${inputText}\n\ntranslate the above ${inputType} code to ${outputLanguage} code.`;
     const res = await openai.createCompletion({
       model: "text-davinci-002",
       prompt: prompt,
@@ -89,6 +91,14 @@ const TranslateTable = () => {
 
     setLoading(false);
   };
+
+  const outputLanguage =
+    outputType === OutputTypes.Structured_Text
+      ? "Structured Text"
+      : "Instruction List";
+  const inputText = codeInput.split('"""')[0];
+  const prompt = `${promptPrefix}\n\n${inputText}\n\ntranslate the above ${inputType} code to ${outputLanguage} code.`;
+  console.log(prompt);
 
   return (
     <Box
