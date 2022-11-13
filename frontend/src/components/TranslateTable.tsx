@@ -7,7 +7,6 @@ import {
   Select,
   IconButton,
   Spinner,
-  Text,
   Center,
 } from "@chakra-ui/react";
 
