@@ -23,8 +23,19 @@ npm start
 ```
 
 ### Demo 
+1. Simple LeetCode Problem
 
-https://user-images.githubusercontent.com/46568041/201511130-09bc1704-41ae-4708-a872-6ee85a6981e3.mov
+```
+const prompt = `${codeInput}\n\ntranslate the above ${inputType} code to ${outputLanguage} code`;
+    const res = await openai.createCompletion({
+      model: "code-davinci-002",
+      prompt: prompt,
+      temperature: 0,
+      max_tokens: 115,
+    });
+```
+
+https://user-images.githubusercontent.com/46568041/201538931-c0704966-2325-4ffb-98b1-7bd2b8029cf9.mov
 
 
 ### Designs
