@@ -1,3 +1,5 @@
+# this snippet is taken from: https://archive.stsci.edu/vo/python_examples.html
+
 def Greg2JD(year, month, day):
 
     if (month < 3):
