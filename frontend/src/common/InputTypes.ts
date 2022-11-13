@@ -1,5 +1,5 @@
 export enum InputTypes {
-  Python = "Python",
-  Cpp = "C++",
-  C = "C",
+  Python = "python",
+  Cpp = "cpp",
+  C = "c",
 }
