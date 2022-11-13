@@ -9,14 +9,14 @@ git clone https://github.com/rchang0501/open-ai-climate-hack.git
 cd open-ai-climate-hack
 ```
 
-2. `cd` into frontend folder and install node modules
+2. `cd` into the frontend folder and install node modules
 
 ```bash
 cd frontend
 npm i
 ```
 
-3. Start React app in frontend folder
+3. Start the React app in the frontend folder
 
 ```
 npm start
