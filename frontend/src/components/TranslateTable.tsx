@@ -15,13 +15,14 @@ import { Configuration, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
   organization: "org-MfVBBu68da5QhwAPXxSsjwWU",
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.REACT_APP_OPENAI_API_KEY ?? "",
 });
 
 const openai = new OpenAIApi(configuration);
 
 const TranslateTable = () => {
   const [codeInput, setCodeInput] = React.useState("");
+  const [codeOutput, setCodeOutput] = React.useState("");
   const [inputType, setInputType] = React.useState(InputTypes.Python);
   const [outputType, setOutputType] = React.useState(
     OutputTypes.Structured_Text
@@ -39,6 +40,26 @@ const TranslateTable = () => {
     const inputValue = e.target.value;
     setCodeInput(inputValue);
   };
+
+  const handleCodeOutputChange = (e: any) => {
+    const inputValue = e.target.value;
+    setCodeInput(inputValue);
+  };
+
+  const handleSubmit = async () => {
+    const prompt = `${codeInput}\ntranslate the above ${inputType} code to ${outputType} code`;
+    const res = await openai.createCompletion({
+      model: "code-davinci-002",
+      prompt: prompt,
+      temperature: 0,
+      max_tokens: 100,
+    });
+    console.log(res.data.choices[0].text);
+    setCodeOutput(res.data.choices[0].text ?? "");
+  };
+
+  // console.log("output:");
+  // console.log(codeOutput);
 
   return (
     <Box
@@ -64,12 +85,13 @@ const TranslateTable = () => {
         </Select>
         <IconButton
           aria-label="switch-icon"
-          icon={<Switch />}
+          isRound
           backgroundColor="background.black.200"
           _hover={{
             bg: `border.informative.100`,
           }}
-          isRound
+          icon={<Switch />}
+          onClick={handleSubmit}
         />
         <Select
           placeholder="Select output language"
@@ -105,11 +127,13 @@ const TranslateTable = () => {
         />
         <Textarea
           paddingTop={5}
+          value={codeOutput}
           variant="unstyled"
           textColor="text.default.100"
           resize="none"
           minHeight="50vh"
           placeholder="View your code here..."
+          onChange={handleCodeOutputChange}
         />
       </HStack>
     </Box>
