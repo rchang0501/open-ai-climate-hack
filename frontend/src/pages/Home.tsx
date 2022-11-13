@@ -10,10 +10,11 @@ const Home = () => {
       width="100vw"
       height="100vh"
       backgroundColor="background.black.100"
-      padding={50}
+      paddingX="7vw"
+      paddingY="5vh"
     >
       <Box mb="100px">
-        <Logo height="5vh" />
+        <Logo width="220" />
         <TranslateTable />
       </Box>
     </Box>
