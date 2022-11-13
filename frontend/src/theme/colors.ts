@@ -62,6 +62,9 @@ const colors = {
     green: {
       100: "#99B7A4",
     },
+    blue: {
+      100: "#8DB8D0",
+    },
   },
   background: {
     white: {

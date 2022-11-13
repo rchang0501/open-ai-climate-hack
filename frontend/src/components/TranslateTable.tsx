@@ -89,7 +89,7 @@ const TranslateTable = () => {
           isRound
           backgroundColor="background.black.200"
           _hover={{
-            bg: `border.informative.100`,
+            bg: `accent.blue.100`,
           }}
           icon={<Switch />}
           onClick={handleSubmit}
