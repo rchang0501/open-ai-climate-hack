@@ -1,0 +1,32 @@
+If you know how to program in any high level language, such as Basic or C, you will be comfortable with Structured Text (ST) programming. ST programming is part of the IEC 61131 standard. An example program is shown in Figure 261. The program is called main and is defined between the statements PROGRAM and END_PROGRAM. Every program begins with statements the define the variables. In this case the variable i is defined to be an integer. The program follows the variable declarations. This program counts from 0 to 10 with a loop. When the example program starts the value of integer memory i will be set to zero. The REPEAT and END_REPEAT statements define the loop. The UNTIL statement defines when the loop must end. A line is present to increment the value of i for each loop.
+
+One important difference between ST and traditional programming languages is the nature of program flow control. A ST program will be run from beginning to end many times each second. A traditional program should not reach the end until it is completely finished. In the previous example the loop could lead to a program that (with some modification) might go into an infinite loop. If this were to happen during a control application the controller would stop responding, the process might become dangerous, and the controller watchdog timer would force a fault. ST has been designed to work with the other PLC programming languages. For example, a ladder logic program can call a structured text subroutine.
+
+The language is composed of written statements separated by semicolons. The statements use 
+predefined statements and program subroutines to change variables. The variables can be explicitly 
+defined values, internally stored variables, or inputs and outputs. Spaces can be used to separate statements and variables, although they are not often necessary. Structured text is not case sensitive, but it 
+can be useful to make variables lower case, and make statements upper case. Indenting and comments 
+should also be used to increase readability and documents the program.
+
+ST programs allow named variables to be defined. This is similar to the use of symbols when 
+programming in ladder logic. When selecting variable names they must begin with a letter, but after 
+that they can include combinations of letters, numbers, and some symbols such as ’_’. Variable names 
+are not case sensitive and can include any combination of upper and lower case letters. Variable names 
+must also be the same as other key words in the system as shown in Figure 263. In addition, these variable must not have the same name as predefined functions.
+
+When defining variables one of the declarations in Figure 264 can be used. These define the 
+scope of the variables. The VAR_INPUT, VAR_OUTPUT and VAR_IN_OUT declarations are used for 
+variables that are passed as arguments to the program or function. The RETAIN declaration is used to 
+retain a variable value, even when the PLC power has been cycled. 
+
+VAR is the general variable declaration
+VAR_INPUT defines a variable list for a function
+VAR_OUTPUT defines output variables from a function
+VAR_IN_OUT defines variable that are both inputs and outputs from a function
+VAR_EXTERNAL 
+VAR_GLOBAL a global variable
+VAR_ACCESS
+RETAIN is a value will be retained when the power is cycled
+CONSTANT is a value that cannot be changed
+AT can tie a variable to a specific location in memory (without this variable locations are chosen by the compiler)
+END_VAR marks the end of a variable declaration
