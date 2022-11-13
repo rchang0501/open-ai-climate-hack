@@ -9,14 +9,13 @@ const Home = () => {
     <Box
       width="100vw"
       height="100vh"
-      backgroundColor="background.black.100"
-      paddingX="7vw"
-      paddingY="5vh"
+      backgroundColor="background.black.200"
+      overflow="hidden"
     >
-      <Box mb="100px">
-        <Logo width="220" />
-        <TranslateTable />
+      <Box padding="10px" width="100%" boxShadow="5px 10px #888888">
+        <Logo width="170" />
       </Box>
+      <TranslateTable />
     </Box>
   );
 };
