@@ -58,6 +58,11 @@ const colors = {
       100: "#0362A5",
     },
   },
+  accent: {
+    green: {
+      100: "#99B7A4",
+    },
+  },
   background: {
     white: {
       100: "#FFFFFF",

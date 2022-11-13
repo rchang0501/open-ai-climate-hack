@@ -6,6 +6,9 @@ import {
   Divider,
   Select,
   IconButton,
+  Spinner,
+  Text,
+  Center,
 } from "@chakra-ui/react";
 
 import { ReactComponent as Switch } from "../assets/switch-arrows.svg";
@@ -27,6 +30,7 @@ const TranslateTable = () => {
   const [outputType, setOutputType] = React.useState(
     OutputTypes.Structured_Text
   );
+  const [loading, setLoading] = React.useState(false);
 
   const handleInputTypeChange = (selectedType: InputTypes) => {
     setInputType(selectedType);
@@ -47,6 +51,7 @@ const TranslateTable = () => {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     const prompt = `${codeInput}\ntranslate the above ${inputType} code to ${outputType} code`;
     const res = await openai.createCompletion({
       model: "code-davinci-002",
@@ -54,12 +59,9 @@ const TranslateTable = () => {
       temperature: 0,
       max_tokens: 100,
     });
-    console.log(res.data.choices[0].text);
+    if (res.data.choices[0].text) setLoading(false);
     setCodeOutput(res.data.choices[0].text ?? "");
   };
-
-  // console.log("output:");
-  // console.log(codeOutput);
 
   return (
     <Box
@@ -136,6 +138,11 @@ const TranslateTable = () => {
           onChange={handleCodeOutputChange}
         />
       </HStack>
+      {loading && (
+        <Center justifyContent="center" marginTop="20px">
+          <Spinner thickness="4px" speed="0.65s" color="accent.green.100" />
+        </Center>
+      )}
     </Box>
   );
 };
