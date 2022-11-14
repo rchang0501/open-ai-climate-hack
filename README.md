@@ -1,4 +1,5 @@
-# open-ai-climate-hack
+![logo](https://user-images.githubusercontent.com/46568041/201555248-875b0d01-6037-4e7b-8241-dbdd684fa892.svg)
+##
 
 ### Set up
 
