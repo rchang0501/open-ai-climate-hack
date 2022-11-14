@@ -58,7 +58,7 @@ const TranslateTable = () => {
 
     const inputText = codeInput.split('"""')[0];
 
-    const prompt = `${inputText}\n\nexplain what the code does line by line`;
+    const prompt = `${inputText}\n\nexplain what the code does`;
     const res = await openai.createCompletion({
       model: "text-davinci-002",
       prompt: prompt,
