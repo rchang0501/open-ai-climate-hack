@@ -13,7 +13,7 @@ const Home = () => {
       overflow="hidden"
     >
       <Box padding="10px" width="100%" boxShadow="5px 10px #888888">
-        <Logo width="170" />
+        <Logo width="180" />
       </Box>
       <TranslateTable />
     </Box>

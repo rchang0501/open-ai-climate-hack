@@ -63,7 +63,7 @@ const TranslateTable = () => {
       model: "text-davinci-002",
       prompt: prompt,
       temperature: 0,
-      max_tokens: 500,
+      max_tokens: 2000,
     });
     const newText = `${inputText}\n\n"""\nCode Explanation:\n${res.data.choices[0].text}\n"""`;
     setCodeInput(newText);
@@ -74,31 +74,22 @@ const TranslateTable = () => {
   const handleSubmit = async () => {
     setLoading(true);
 
-    const outputLanguage =
-      outputType === OutputTypes.Structured_Text
-        ? "Structured Text"
-        : "Instruction List";
     const inputText = codeInput.split('"""')[0];
 
-    const prompt = `${promptPrefix}\n\n${inputText}\n\ntranslate the above ${inputType} code to ${outputLanguage} code.`;
+    const prompt = promptPrefix(inputText);
     const res = await openai.createCompletion({
       model: "text-davinci-002",
       prompt: prompt,
       temperature: 0,
-      max_tokens: 500,
+      max_tokens: 2000,
     });
     setCodeOutput(res.data.choices[0].text ?? "");
 
     setLoading(false);
   };
 
-  const outputLanguage =
-    outputType === OutputTypes.Structured_Text
-      ? "Structured Text"
-      : "Instruction List";
   const inputText = codeInput.split('"""')[0];
-  const prompt = `${promptPrefix}\n\n${inputText}\n\ntranslate the above ${inputType} code to ${outputLanguage} code.`;
-  console.log(prompt);
+  console.log(promptPrefix(inputText));
 
   return (
     <Box
