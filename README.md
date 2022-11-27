@@ -1,4 +1,6 @@
-![logo](https://user-images.githubusercontent.com/46568041/201555248-875b0d01-6037-4e7b-8241-dbdd684fa892.svg)
+![omniglot_logo_bkg](https://user-images.githubusercontent.com/46568041/204164785-f74dfb73-e3dd-4c7b-bdcd-047809eb7f1d.svg)
+
+Video Submission: https://youtu.be/3H2ICCtP1Ew
 ##
 
 ### Set up
